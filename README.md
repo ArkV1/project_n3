@@ -1,9 +1,9 @@
 # [Rust] [Actix-web] project_n3
   
 Project description placeholder
-line1
-line2
-line3
+line1  
+line2  
+line3  
 
 ## BASICS:  
 ✓ HTTP redirects to HTTPS  
