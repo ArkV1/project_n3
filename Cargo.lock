@@ -270,10 +270,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "actix-web-middleware-redirect-https"
-version = "3.0.1"
+name = "actix-web-middleware-redirect-scheme"
+version = "3.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3ce1464786203c29120f6d1e4dcdc9c3975506e70b89c3a56c5389f265256dc6"
+checksum = "711ca00d71f91aadf3b2b89e3c28e9d9a48b5f28f861a2bd195cd689f1f553bd"
 dependencies = [
  "actix-service",
  "actix-web",
@@ -1200,7 +1200,7 @@ name = "project_n3"
 version = "0.1.0"
 dependencies = [
  "actix-web",
- "actix-web-middleware-redirect-https",
+ "actix-web-middleware-redirect-scheme",
  "openssl",
 ]
 

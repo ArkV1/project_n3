@@ -8,4 +8,4 @@ edition = "2021"
 [dependencies]
 actix-web = { version = "3", features = ["openssl"] }
 openssl = { version = "0.10" }
-actix-web-middleware-redirect-https = "3.0.1"
+actix-web-middleware-redirect-scheme = "3.0"
