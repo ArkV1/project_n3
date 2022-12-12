@@ -1,11 +1,12 @@
 # [Rust] [Actix-web] project_n3
   
-BASICS:  
+# BASICS:  
 ✓ HTTP redirects to HTTPS  
-FEATURES:  
+# FEATURES:  
 ✓ TEMPLATING  
 ✓ LOCALIZATION  
 
+# HELPERS
 OpenSSL libs on Windows 11  
 $ $env:OPENSSL_DIR="C:\Program Files\OpenSSL-Win64"  
   
