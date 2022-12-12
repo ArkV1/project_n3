@@ -1708,6 +1708,7 @@ dependencies = [
  "fluent-templates",
  "openssl",
  "tera",
+ "unic-langid",
 ]
 
 [[package]]

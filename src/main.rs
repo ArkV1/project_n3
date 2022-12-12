@@ -1,7 +1,27 @@
+// ACTIX
 use actix_web::{get, App, HttpRequest, HttpServer, Responder};
+// HTTPS
 use actix_web_middleware_redirect_scheme::RedirectSchemeBuilder;
 use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
+// TEMPLATING
+use tera::Tera;
+// LOCALS
+use unic_langid::{LanguageIdentifier, langid};
+use fluent_templates::{FluentLoader, static_loader};
 
+const US_ENGLISH: LanguageIdentifier = langid!("en-US");
+
+static_loader! {
+    // Declare our `StaticLoader` named `LOCALES`.
+    static LOCALES = {
+        // The directory of localisations and fluent resources.
+        locales: "./locales",
+        // The language to falback on if something is not present.
+        fallback_language: "en-US",
+        // Optional: A fluent resource that is shared with every locale.
+        core_locales: "./locales/core.ftl",
+    };
+}
 #[get("/")]
 async fn index(_req: HttpRequest) -> impl Responder {
     "Welcome!"
@@ -18,6 +38,10 @@ async fn main() -> std::io::Result<()> {
         .unwrap();
     builder.set_certificate_chain_file("cert.pem").unwrap();
 
+    let mut tera = tera::Tera::default();
+    let ctx = tera::Context::default();
+    tera.register_function("fluent", FluentLoader::new(&*LOCALES));
+    
     HttpServer::new(|| {
         App::new()
             // HTTPS ONLY
