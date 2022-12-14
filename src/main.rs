@@ -4,12 +4,11 @@ use actix_web::{get, web, App, HttpRequest, HttpResponse, HttpServer, Responder}
 use actix_web_middleware_redirect_scheme::RedirectSchemeBuilder;
 use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
 // TEMPLATING
-use tera::{Tera, Context};
 use lazy_static::lazy_static;
+use tera::{Context, Tera};
 // LOCALS
-use fluent_templates::{FluentLoader, static_loader};
-use unic_langid::{LanguageIdentifier, langid};
-
+use fluent_templates::{static_loader, FluentLoader, Loader};
+use unic_langid::{langid, LanguageIdentifier};
 
 lazy_static! {
     pub static ref TEMPLATES: Tera = {
@@ -42,9 +41,10 @@ static_loader! {
     };
 }
 
-async fn index(_req: HttpRequest) -> impl Responder  {
+#[get("/")]
+async fn index(_req: HttpRequest) -> impl Responder {
     let mut context = Context::new();
-    context.insert("name", "Artyom");
+    context.insert("hello_world", &LOCALES.lookup(&US_ENGLISH, "hello-world").unwrap());
     HttpResponse::Ok().body(TEMPLATES.render("index.html", &context).unwrap())
 }
 
@@ -68,7 +68,8 @@ async fn main() -> std::io::Result<()> {
                     .replacements(&[(":8080", ":8443")]) // !!!TESTING PORTS!!!
                     .build(),
             )
-            .service(web::resource("/").route(web::get().to(index)))    })
+            .service(index)
+    })
     .bind("127.0.0.1:8080")? // Testing port :8080 | Production port :80 - UNSECURED
     .bind_openssl("127.0.0.1:8443", builder)? // Testing port :8443 | Production port :443 - SECURED
     .run()
