@@ -11,7 +11,8 @@ openssl = "0.10"
 actix-web-middleware-redirect-scheme = "3.0"
 
 tera = "1.17.1"
+lazy_static = "1.4.0"
 
-unic-langid = "0.9.1"
 fluent = "0.16.0"
 fluent-templates = { version = "0.8.0", features = ["tera"] }
+unic-langid = "0.9.1"

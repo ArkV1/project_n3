@@ -1706,6 +1706,7 @@ dependencies = [
  "actix-web-middleware-redirect-scheme",
  "fluent",
  "fluent-templates",
+ "lazy_static",
  "openssl",
  "tera",
  "unic-langid",
